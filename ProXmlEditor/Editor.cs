@@ -4,7 +4,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-
 namespace ProXmlEditor {
     public partial class Editor : Form {
         private int _tabCount = 0;
@@ -12,7 +11,6 @@ namespace ProXmlEditor {
         public Editor() {
             InitializeComponent();
         }
-
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
             AddTab();
@@ -31,7 +29,7 @@ namespace ProXmlEditor {
             Application.Exit();
         }
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-            using (AboutForm af = new AboutForm()) {
+            using (var af = new AboutForm()) {
                 string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 af.ProgramVersion = version.Substring(0, version.Length - 4);
                 af.Title = Util.GetTitle();
@@ -105,8 +103,7 @@ namespace ProXmlEditor {
                 AddTab();
             }
         }
-
-        
+      
         private void newBtn_Click(object sender, EventArgs e) {
             AddTab();
         }
@@ -136,7 +133,6 @@ namespace ProXmlEditor {
             RemoveTab();
         }
         
-
         private EditorUserControl GetXmlEditor() {
             if (tabControl1.TabPages.Count != 0) {
                 return (EditorUserControl) tabControl1.SelectedTab.Controls["Body"];
