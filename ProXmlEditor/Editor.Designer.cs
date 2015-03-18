@@ -24,6 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Editor));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,6 +38,7 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -52,7 +54,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.closeBTN = new System.Windows.Forms.ToolStripButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -87,7 +89,7 @@
             // 
             // newToolStripMenuItem
             // 
-            this.newToolStripMenuItem.Image = global::ProXmlEditor.Properties.Resources.new104;
+            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
@@ -96,7 +98,7 @@
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Image = global::ProXmlEditor.Properties.Resources.file96;
+            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
@@ -105,7 +107,7 @@
             // 
             // removeToolStripMenuItem
             // 
-            this.removeToolStripMenuItem.Image = global::ProXmlEditor.Properties.Resources.round60;
+            this.removeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("removeToolStripMenuItem.Image")));
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             this.removeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
             this.removeToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
@@ -126,7 +128,7 @@
             // 
             // saveAsToolStripMenuItem
             // 
-            this.saveAsToolStripMenuItem.Image = global::ProXmlEditor.Properties.Resources.file99;
+            this.saveAsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAsToolStripMenuItem.Image")));
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
@@ -161,15 +163,22 @@
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
             // 
             // aboutToolStripMenuItem
             // 
@@ -229,7 +238,8 @@
             this.toolStripSeparator3,
             this.refreshBTN,
             this.toolStripSeparator4,
-            this.closeBTN});
+            this.closeBTN,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -240,7 +250,7 @@
             // newBTN
             // 
             this.newBTN.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newBTN.Image = global::ProXmlEditor.Properties.Resources.new104;
+            this.newBTN.Image = ((System.Drawing.Image)(resources.GetObject("newBTN.Image")));
             this.newBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newBTN.Name = "newBTN";
             this.newBTN.Size = new System.Drawing.Size(38, 20);
@@ -250,7 +260,7 @@
             // openBTN
             // 
             this.openBTN.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openBTN.Image = global::ProXmlEditor.Properties.Resources.file96;
+            this.openBTN.Image = ((System.Drawing.Image)(resources.GetObject("openBTN.Image")));
             this.openBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openBTN.Name = "openBTN";
             this.openBTN.Size = new System.Drawing.Size(38, 20);
@@ -265,7 +275,7 @@
             // refreshBTN
             // 
             this.refreshBTN.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.refreshBTN.Image = global::ProXmlEditor.Properties.Resources.refresh57;
+            this.refreshBTN.Image = ((System.Drawing.Image)(resources.GetObject("refreshBTN.Image")));
             this.refreshBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshBTN.Name = "refreshBTN";
             this.refreshBTN.Size = new System.Drawing.Size(38, 20);
@@ -280,19 +290,20 @@
             // closeBTN
             // 
             this.closeBTN.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.closeBTN.Image = global::ProXmlEditor.Properties.Resources.delete82;
+            this.closeBTN.Image = ((System.Drawing.Image)(resources.GetObject("closeBTN.Image")));
             this.closeBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.closeBTN.Name = "closeBTN";
             this.closeBTN.Size = new System.Drawing.Size(38, 20);
             this.closeBTN.Text = "toolStripButton5";
             this.closeBTN.Click += new System.EventHandler(this.closeBtn_Click);
             // 
-            // cutToolStripMenuItem
+            // toolStripButton1
             // 
-            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cutToolStripMenuItem.Text = "Cut";
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(38, 4);
+            this.toolStripButton1.Text = "toolStripButton1";
             // 
             // Editor
             // 
@@ -346,5 +357,6 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
