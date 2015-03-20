@@ -36,6 +36,7 @@ namespace ProXmlEditor {
                 af.ShowDialog();
             }
         }
+
         private void Editor_Load(object sender, EventArgs e) {
             AddTab();
         }
@@ -103,7 +104,21 @@ namespace ProXmlEditor {
                 AddTab();
             }
         }
-      
+        private void Copy() {
+            
+        }
+        private void Paste() {
+            
+        }
+
+        private void Copy() {
+            
+        }
+        public ToolStripMenuItem PasteToolStripMenuItem {
+            get { return pasteToolStripMenuItem; }
+            set { pasteToolStripMenuItem = value; }
+        }
+
         private void newBtn_Click(object sender, EventArgs e) {
             AddTab();
         }
@@ -159,6 +174,6 @@ namespace ProXmlEditor {
             else {
                 inTreeNode.Text = inXmlNode.InnerText;
             }
-        }
+        }]
     }
 }
