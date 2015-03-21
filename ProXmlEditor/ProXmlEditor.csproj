@@ -53,17 +53,17 @@
     <Compile Include="AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Editor.Designer.cs">
-      <DependentUpon>Editor.cs</DependentUpon>
-    </Compile>
     <Compile Include="EditorUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="EditorUserControl.designer.cs">
       <DependentUpon>EditorUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorXML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorXML.Designer.cs">
+      <DependentUpon>EditorXML.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,22 +82,20 @@
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor.resx">
-      <DependentUpon>Editor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditorUserControl.resx">
       <DependentUpon>EditorUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditorXML.resx">
+      <DependentUpon>EditorXML.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ValidateForm.resx">
       <DependentUpon>ValidateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -109,9 +107,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <Resource Include="Resources\new104.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\document79.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\open131.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\floppy15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close20.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
