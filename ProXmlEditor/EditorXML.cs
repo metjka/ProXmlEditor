@@ -103,14 +103,7 @@ namespace ProXmlEditor {
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-            using (var af = new AboutForm()) {
-                string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                af.ProgramVersion = version.Substring(0, version.Length - 4);
-                af.Title = Util.GetTitle();
-                af.ShowDialog();
-            }
-        }
+        
         
         private EditorUserControl GetXmlEditor() {
             if (tabControl1.TabPages.Count != 0) {
@@ -175,6 +168,15 @@ namespace ProXmlEditor {
 
         private void EditorXML_Load(object sender, EventArgs e) {
             AddTab();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+            using (var af = new AboutForm()) {
+                string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                af.ProgramVersion = version.Substring(0, version.Length - 4);
+                af.Title = Util.GetTitle();
+                af.ShowDialog();
+            }
         }
 
     }

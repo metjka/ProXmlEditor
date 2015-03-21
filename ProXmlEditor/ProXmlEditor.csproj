@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ProXmlEditor.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.TextEditor">
       <HintPath>.\ICSharpCode.TextEditor.dll</HintPath>
@@ -72,6 +75,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ValidateForm.cs">
       <SubType>Form</SubType>
