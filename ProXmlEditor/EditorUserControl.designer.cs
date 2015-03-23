@@ -49,6 +49,7 @@ namespace ProXmlEditor
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemUndo,
             this.toolStripMenuItemRedo,
@@ -60,72 +61,82 @@ namespace ProXmlEditor
             this.toolStripSeparator2,
             this.toolStripMenuItemSelectAll});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(129, 170);
+            this.contextMenuStrip.Size = new System.Drawing.Size(175, 170);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // toolStripMenuItemUndo
             // 
             this.toolStripMenuItemUndo.Name = "toolStripMenuItemUndo";
-            this.toolStripMenuItemUndo.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.toolStripMenuItemUndo.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItemUndo.Text = "Undo";
             this.toolStripMenuItemUndo.Click += new System.EventHandler(this.toolStripMenuItemUndo_Click);
             // 
             // toolStripMenuItemRedo
             // 
             this.toolStripMenuItemRedo.Name = "toolStripMenuItemRedo";
-            this.toolStripMenuItemRedo.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemRedo.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Z)));
+            this.toolStripMenuItemRedo.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItemRedo.Text = "Redo";
             this.toolStripMenuItemRedo.Click += new System.EventHandler(this.toolStripMenuItemRedo_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(125, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
             // 
             // toolStripMenuItemCut
             // 
             this.toolStripMenuItemCut.Name = "toolStripMenuItemCut";
-            this.toolStripMenuItemCut.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.toolStripMenuItemCut.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItemCut.Text = "Cut";
             this.toolStripMenuItemCut.Click += new System.EventHandler(this.toolStripMenuItemCut_Click);
             // 
             // toolStripMenuItemCopy
             // 
             this.toolStripMenuItemCopy.Name = "toolStripMenuItemCopy";
-            this.toolStripMenuItemCopy.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.toolStripMenuItemCopy.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItemCopy.Text = "Copy";
             this.toolStripMenuItemCopy.Click += new System.EventHandler(this.toolStripMenuItemCopy_Click);
             // 
             // toolStripMenuItemPaste
             // 
             this.toolStripMenuItemPaste.Name = "toolStripMenuItemPaste";
-            this.toolStripMenuItemPaste.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.toolStripMenuItemPaste.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItemPaste.Text = "Paste";
             this.toolStripMenuItemPaste.Click += new System.EventHandler(this.toolStripMenuItemPaste_Click);
             // 
             // toolStripMenuItemDelete
             // 
             this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
-            this.toolStripMenuItemDelete.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.toolStripMenuItemDelete.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItemDelete.Text = "Delete";
             this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(125, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(171, 6);
             // 
             // toolStripMenuItemSelectAll
             // 
             this.toolStripMenuItemSelectAll.Name = "toolStripMenuItemSelectAll";
-            this.toolStripMenuItemSelectAll.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemSelectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.toolStripMenuItemSelectAll.Size = new System.Drawing.Size(174, 22);
             this.toolStripMenuItemSelectAll.Text = "Select All";
             this.toolStripMenuItemSelectAll.Click += new System.EventHandler(this.toolStripMenuItemSelectAll_Click);
             // 
             // textEditorControl
             // 
+            this.textEditorControl.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.textEditorControl.ContextMenuStrip = this.contextMenuStrip;
             this.textEditorControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.textEditorControl.IsReadOnly = false;
             this.textEditorControl.Location = new System.Drawing.Point(0, 0);
             this.textEditorControl.Name = "textEditorControl";
@@ -137,7 +148,9 @@ namespace ProXmlEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Controls.Add(this.textEditorControl);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "EditorUserControl";
             this.Size = new System.Drawing.Size(492, 278);
             this.contextMenuStrip.ResumeLayout(false);

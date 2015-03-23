@@ -3,6 +3,7 @@
 // http://www.codeplex.com/XmlVisualizer
 
 using System;
+using System.Resources;
 using System.Windows.Forms;
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
@@ -42,6 +43,13 @@ namespace ProXmlEditor {
             return textEditorControl.Text;
         }
 
+        public int GetLengthOfLinesInText() {
+            return textEditorControl.ActiveTextAreaControl.Document.TotalNumberOfLines;
+        }
+
+        //public int GetLengthOfLine(int lineN) {
+            //return textEditorControl.ActiveTextAreaControl.Document.TextLength
+        //}
         public void SetText(string text) {
             bool modified = ChangesInEditor;
             textEditorControl.Text = text;

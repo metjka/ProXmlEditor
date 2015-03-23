@@ -133,10 +133,16 @@
   <data name="delete30" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\delete30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="refresh39" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\refresh39.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrows66" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrows66.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="refresh39" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\refresh39.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrow498" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow498.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

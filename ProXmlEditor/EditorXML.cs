@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Schema;
 
 namespace ProXmlEditor {
     public partial class EditorXml : Form {
         public EditorXml() {
-            InitializeComponent();   
+            InitializeComponent();
         }
-        private int _tabCount = 0;
 
-        
+        private int _tabCount;
+
+
         private void AddTab() {
-            var body = new EditorUserControl {Name = "Body", Dock = DockStyle.Fill};
+            var body = new EditorUserControl {Name = "body", Dock = DockStyle.Fill};
 
             body.SetText("");
             var newPage = new TabPage();
@@ -32,17 +29,20 @@ namespace ProXmlEditor {
 
             tabControl1.TabPages.Add(newPage);
         }
+
         private void Open() {
             AddTab();
             tabControl1.SelectedIndex += 1;
             openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             openFileDialog1.Filter = "XML|*.xml|Text Files|*.txt|All Files|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK) {
-                var SR = new StreamReader(openFileDialog1.FileName);
-                GetXmlEditor().SetText(SR.ReadToEnd());
-                SR.Close();
+                var sr = new StreamReader(openFileDialog1.FileName);
+                GetXmlEditor().SetText(sr.ReadToEnd());
+                sr.Close();
             }
+            tabControl1.SelectedTab.Text = openFileDialog1.SafeFileName;
         }
+
         private void Save() {
             //saveFileDialog1.FileName = tabControl1.SelectedTab.Name;
             //saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -57,6 +57,7 @@ namespace ProXmlEditor {
                 SW.Close();
             }
         }
+
         private void SaveAs() {
             saveFileDialog1.FileName = tabControl1.SelectedTab.Name;
             saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -69,51 +70,78 @@ namespace ProXmlEditor {
                 SW.Close();
             }
         }
+
         private void RemoveTab() {
-            if (tabControl1.TabPages.Count != 1) {
+            if (tabControl1.TabPages.Count > 1) {
                 tabControl1.TabPages.Remove(tabControl1.SelectedTab);
             }
-            else {
-                tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+            else if (tabControl1.TabPages.Count == 1) {
                 AddTab();
+                tabControl1.TabPages.Remove(tabControl1.SelectedTab);
+                
             }
-        }
-        private void Copy() {
-            
-        }
-        private void Paste() {
-            
         }
 
-        
-        
+        private void Copy() {
+        }
+
+        private void Paste() {
+        }
+
+        private void ExpandTree() {
+            treeView1.ExpandAll();
+            treeView1.Nodes[0].EnsureVisible();
+        }
+
+        private void CollapseTree() {
+            treeView1.CollapseAll();
+            treeView1.Nodes[0].Expand();
+        }
+
+        private void XmlTreeMaker() {
+            try {
+                var xmldoc = new XmlDocument();
+                XmlNode xmlnode;
+                string xmlText = GetXmlEditor().GetText();
+                xmldoc.LoadXml(xmlText);
+                xmlnode = xmldoc.ChildNodes[1];
+                treeView1.Nodes.Clear();
+                treeView1.Nodes.Add(new TreeNode(xmldoc.DocumentElement.Name));
+                TreeNode tNode;
+                tNode = treeView1.Nodes[0];
+                AddNode(xmlnode, tNode);
+                textBox1.Text = "Xml file is valid";
+
+            }
+            catch (XmlException exception) {
+                textBox1.Text = exception.Message;
+            }
+        }
+
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
             AddTab();
             tabControl1.SelectedIndex += 1;
         }
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e) {
             Open();
         }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
             Save();
         }
+
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
             SaveAs();
         }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Exit();
         }
-        
-        
+
+
         private EditorUserControl GetXmlEditor() {
-            if (tabControl1.TabPages.Count != 0) {
                 return (EditorUserControl) tabControl1.SelectedTab.Controls["body"];
-            }
-            else {
-                MessageBox.Show("You donn`t have any tab");
-                AddTab();
-                return (EditorUserControl) tabControl1.TabPages["0"].Controls["body"];
-            }
         }
 
         private static void AddNode(XmlNode inXmlNode, TreeNode inTreeNode) {
@@ -135,33 +163,21 @@ namespace ProXmlEditor {
             }
         }
 
-      
+
         private void newBTN_Click(object sender, EventArgs e) {
             AddTab();
             tabControl1.SelectedIndex += 1;
         }
+
         private void openBTN_Click(object sender, EventArgs e) {
             Open();
         }
+
         private void refreshBTN_Click(object sender, EventArgs e) {
-            try {
-                var xmldoc = new XmlDocument();
-                XmlNode xmlnode;
-                string xmlText = GetXmlEditor().GetText();
-                if (xmlText != null) {
-                    xmldoc.LoadXml(xmlText);
-                    xmlnode = xmldoc.ChildNodes[1];
-                    treeView1.Nodes.Clear();
-                    treeView1.Nodes.Add(new TreeNode(xmldoc.DocumentElement.Name));
-                    TreeNode tNode;
-                    tNode = treeView1.Nodes[0];
-                    AddNode(xmlnode, tNode);
-                }
-            }
-            catch (XmlException exception) {
-                MessageBox.Show(exception.Message);
-            }
+            XmlTreeMaker();
+            ExpandTree();
         }
+
         private void removeBTN_Click(object sender, EventArgs e) {
             RemoveTab();
         }
@@ -172,12 +188,121 @@ namespace ProXmlEditor {
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
             using (var af = new AboutForm()) {
-                string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 af.ProgramVersion = version.Substring(0, version.Length - 4);
                 af.Title = Util.GetTitle();
                 af.ShowDialog();
             }
         }
 
+        private void expandBtn_Click(object sender, EventArgs e) {
+            ExpandTree();
+        }
+
+        private void collapsBtn_Click(object sender, EventArgs e) {
+            CollapseTree();
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {
+            var obj = e.Node.Tag as XmlTextReader;
+            if (obj != null) {
+                if ((obj.LineNumber != 0) && (obj.LineNumber < GetXmlEditor().GetLengthOfLinesInText())) {
+                    int length = 0;
+                    for (int i = 0; i < obj.LineNumber - 1; i++) {
+                        //length += GetXmlEditor().GetLengthOfLinesInText()
+                    }
+                }
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+            XmlTreeMaker();
+        }
+
+        private void removeToolStripMenuItem_Click(object sender, EventArgs e) {
+            RemoveTab();
+        }
+        /*
+        private void tvSchema_AfterSelect(object sender, TreeViewEventArgs e) {
+            var obj = e.Node.Tag as XmlSchemaObject;
+            // if this is a schema object...
+            if (obj != null) {
+                // find the corresponding line in the XSD source and highlight it
+                if ((obj.LineNumber != 0) && (obj.LineNumber < edSchema.Lines.Length)) {
+                    int length = 0;
+                    for (int i = 0; i < obj.LineNumber - 1; i++) {
+                        // get the length of the line including CRLF
+                        length += edSchema.Lines[i].Length + 2;
+                    }
+                    // highlight the line
+                    edSchema.Select(length, edSchema.Lines[obj.LineNumber - 1].Length);
+                }
+
+                // Update simple and global type combo boxes.
+                // Get the name of the element type so that we can find it in the simple or global type list
+                XmlQualifiedName name = null; // assume failure
+                if (obj is XmlSchemaAttribute) {
+                    // this is easy.
+                    name = ((XmlSchemaAttribute)obj).SchemaTypeName;
+                }
+                else if (obj is XmlSchemaSimpleType) {
+                    // if it's a simple type, get the restriction type, if it exists
+                    var restriction = ((XmlSchemaSimpleType)obj).Content as XmlSchemaSimpleTypeRestriction;
+                    if (restriction != null) {
+                        name = restriction.BaseTypeName;
+                    }
+                }
+                else if (obj is XmlSchemaElement) {
+                    // if it's an element, determine if it's a simple type subnode of a complex type...
+                    // and then get the restriction type, if it exists
+                    var el = obj as XmlSchemaElement;
+                    if (el.SchemaType is XmlSchemaSimpleType) {
+                        var st = el.SchemaType as XmlSchemaSimpleType;
+                        var rest = st.Content as XmlSchemaSimpleTypeRestriction;
+                        if (rest != null) {
+                            name = rest.BaseTypeName;
+                        }
+                    }
+                    else {
+                        // otherwise get the element name
+                        name = el.SchemaTypeName;
+
+                        // if the name is null, then there must be a reference instead
+                        if (name.Name == "") {
+                            name = el.RefName;
+                        }
+                    }
+                }
+
+                // select the name from either the simple type list or the global element type list
+                if (name != null) {
+                    // see if the name exists in the simple type list
+                    int idx = cbSimpleTypes.FindStringExact(name.Name);
+                    cbSimpleTypes.SelectedIndex = idx;
+                    cbSimpleTypes.Enabled = true;
+
+                    // see if the name exists in the complex type list
+                    idx = cbGlobalTypes.FindStringExact(name.Name);
+                    cbGlobalTypes.SelectedIndex = idx;
+                    cbGlobalTypes.Enabled = true;
+                }
+                else {
+                    // if there is no name, then disable the comboboxes
+                    cbSimpleTypes.SelectedIndex = -1;
+                    cbGlobalTypes.SelectedIndex = -1;
+                    cbSimpleTypes.Enabled = false;
+                    cbGlobalTypes.Enabled = false;
+                }
+            }
+            else {
+                // if this isn't a schema object, then disable the comboboxes
+                cbSimpleTypes.SelectedIndex = -1;
+                cbGlobalTypes.SelectedIndex = -1;
+                cbSimpleTypes.Enabled = false;
+                cbGlobalTypes.Enabled = false;
+            }
+        }
+
+        */
     }
 }

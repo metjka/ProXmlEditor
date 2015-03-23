@@ -62,11 +62,11 @@
     <Compile Include="EditorUserControl.designer.cs">
       <DependentUpon>EditorUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditorXML.cs">
+    <Compile Include="EditorXml.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditorXML.Designer.cs">
-      <DependentUpon>EditorXML.cs</DependentUpon>
+    <Compile Include="EditorXml.Designer.cs">
+      <DependentUpon>EditorXml.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,28 +77,19 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="ValidateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ValidateForm.designer.cs">
-      <DependentUpon>ValidateForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorUserControl.resx">
       <DependentUpon>EditorUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditorXML.resx">
-      <DependentUpon>EditorXML.cs</DependentUpon>
+    <EmbeddedResource Include="EditorXml.resx">
+      <DependentUpon>EditorXml.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ValidateForm.resx">
-      <DependentUpon>ValidateForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -133,6 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrows66.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow498.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

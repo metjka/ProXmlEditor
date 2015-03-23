@@ -63,6 +63,26 @@ namespace ProXmlEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap arrow498 {
+            get {
+                object obj = ResourceManager.GetObject("arrow498", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap arrows66 {
+            get {
+                object obj = ResourceManager.GetObject("arrows66", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap close20 {
             get {
                 object obj = ResourceManager.GetObject("close20", resourceCulture);
