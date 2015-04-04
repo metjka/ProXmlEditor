@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace ProXmlEditor {
     public partial class EditorXml : Form {
@@ -14,7 +15,6 @@ namespace ProXmlEditor {
 
         private int _tabCount;
 
-
         private void AddTab() {
             var body = new EditorUserControl {Name = "body", Dock = DockStyle.Fill};
 
@@ -22,7 +22,7 @@ namespace ProXmlEditor {
             var newPage = new TabPage();
             _tabCount += 1;
 
-            string documentText = "Document " + _tabCount;
+            string documentText = "Xml file " + _tabCount;
             newPage.Name = documentText;
             newPage.Text = documentText;
             newPage.Controls.Add(body);
@@ -82,41 +82,79 @@ namespace ProXmlEditor {
             }
         }
 
-        private void Copy() {
-        }
-
-        private void Paste() {
-        }
-
         private void ExpandTree() {
             treeView1.ExpandAll();
-            treeView1.Nodes[0].EnsureVisible();
+            if (treeView1.TopNode != null) {
+                treeView1.Nodes[0].EnsureVisible();
+            }
         }
 
         private void CollapseTree() {
             treeView1.CollapseAll();
-            treeView1.Nodes[0].Expand();
+            if (treeView1.TopNode != null) {
+                treeView1.Nodes[0].Expand();
+            }
         }
 
         private void XmlTreeMaker() {
             try {
-                var xmldoc = new XmlDocument();
-                XmlNode xmlnode;
+                XmlDocument xmldoc = new XmlDocument();
                 string xmlText = GetXmlEditor().GetText();
                 xmldoc.LoadXml(xmlText);
-                xmlnode = xmldoc.ChildNodes[1];
+                XmlNode xmlnode = xmldoc.ChildNodes[1];
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add(new TreeNode(xmldoc.DocumentElement.Name));
                 TreeNode tNode;
                 tNode = treeView1.Nodes[0];
                 AddNode(xmlnode, tNode);
                 textBox1.Text = "Xml file is valid";
-
             }
-            catch (XmlException exception) {
-                textBox1.Text = exception.Message;
+            catch (XmlException e) {
+                textBox1.Text = e.Message;
+                treeView1.Nodes.Clear();
             }
         }
+
+
+        private static void AddNode(XmlNode inXmlNode, TreeNode inTreeNode) {
+            XmlNode xNode;
+            XmlNodeList nodeList;
+
+            if (inXmlNode.HasChildNodes) {
+                nodeList = inXmlNode.ChildNodes;
+
+                for (int i = 0; i <= nodeList.Count - 1; i++) {
+                    xNode = inXmlNode.ChildNodes[i];
+
+                    StringBuilder attributes = new StringBuilder();
+
+                    if (xNode.Attributes != null) {
+                        foreach (XmlAttribute attribute in xNode.Attributes) {
+
+                            attributes.Append(string.Format(" {0}=\"{1}\"", attribute.Name, attribute.Value));
+                        }
+                    }
+                    inTreeNode.Nodes.Add(new TreeNode(string.Format("{0}{1}", xNode.Name, attributes)));
+                    TreeNode tNode = inTreeNode.Nodes[i];
+                    AddNode(xNode, tNode);
+                }
+            }
+            else {
+                if (inXmlNode.InnerText == "") {
+                    inTreeNode.BackColor = Color.FromArgb(50, 206,0,0);
+                    inTreeNode.ForeColor = Color.Wheat;
+                    inTreeNode.Text = (inXmlNode.Name).Trim();
+                }
+                else {
+                    inTreeNode.Text = (inXmlNode.InnerText);
+                }
+        }
+        }
+
+        private EditorUserControl GetXmlEditor() {
+            return (EditorUserControl)tabControl1.SelectedTab.Controls["body"];
+        }
+
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
             AddTab();
@@ -139,29 +177,11 @@ namespace ProXmlEditor {
             Application.Exit();
         }
 
-
-        private EditorUserControl GetXmlEditor() {
-                return (EditorUserControl) tabControl1.SelectedTab.Controls["body"];
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e) {
+            XmlTreeMaker();
+            ExpandTree();
         }
 
-        private static void AddNode(XmlNode inXmlNode, TreeNode inTreeNode) {
-            XmlNode xNode;
-            TreeNode tNode;
-            XmlNodeList nodeList;
-
-            if (inXmlNode.HasChildNodes) {
-                nodeList = inXmlNode.ChildNodes;
-                for (int i = 0; i <= nodeList.Count - 1; i++) {
-                    xNode = inXmlNode.ChildNodes[i];
-                    inTreeNode.Nodes.Add(new TreeNode(xNode.Name));
-                    tNode = inTreeNode.Nodes[i];
-                    AddNode(xNode, tNode);
-                }
-            }
-            else {
-                inTreeNode.Text = inXmlNode.InnerText;
-            }
-        }
 
 
         private void newBTN_Click(object sender, EventArgs e) {
@@ -171,6 +191,8 @@ namespace ProXmlEditor {
 
         private void openBTN_Click(object sender, EventArgs e) {
             Open();
+            XmlTreeMaker();
+            ExpandTree();
         }
 
         private void refreshBTN_Click(object sender, EventArgs e) {
@@ -190,7 +212,17 @@ namespace ProXmlEditor {
             using (var af = new AboutForm()) {
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 af.ProgramVersion = version.Substring(0, version.Length - 4);
-                af.Title = Util.GetTitle();
+
+                Assembly thisAssembly = Assembly.GetExecutingAssembly();
+                object[] attributes = thisAssembly.GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+                string title = "";
+
+                if (attributes.Length == 1) {
+                    title = ((AssemblyTitleAttribute)attributes[0]).Title;
+                }
+
+                
+                af.Title = title;
                 af.ShowDialog();
             }
         }
@@ -203,18 +235,6 @@ namespace ProXmlEditor {
             CollapseTree();
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {
-            var obj = e.Node.Tag as XmlTextReader;
-            if (obj != null) {
-                if ((obj.LineNumber != 0) && (obj.LineNumber < GetXmlEditor().GetLengthOfLinesInText())) {
-                    int length = 0;
-                    for (int i = 0; i < obj.LineNumber - 1; i++) {
-                        //length += GetXmlEditor().GetLengthOfLinesInText()
-                    }
-                }
-            }
-        }
-
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
             XmlTreeMaker();
         }
@@ -222,6 +242,23 @@ namespace ProXmlEditor {
         private void removeToolStripMenuItem_Click(object sender, EventArgs e) {
             RemoveTab();
         }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {
+            var obj = e.Node.Tag as XmlNode;
+            if (obj != null) {
+                /*if ((obj.LineNumber != 0) && (obj.LineNumber < GetXmlEditor().GetCountOfLines())) {
+                    int length = 0;
+                    for (int i = 0; i < obj.LineNumber - 1; i++) {
+                        length += GetXmlEditor().GetCountOfLines();
+
+                        MessageBox.Show(obj.LineNumber.ToString());
+                    }
+                }
+                */
+            }
+        }
+
+        
         /*
         private void tvSchema_AfterSelect(object sender, TreeViewEventArgs e) {
             var obj = e.Node.Tag as XmlSchemaObject;
@@ -302,7 +339,7 @@ namespace ProXmlEditor {
                 cbGlobalTypes.Enabled = false;
             }
         }
-
         */
+        
     }
 }

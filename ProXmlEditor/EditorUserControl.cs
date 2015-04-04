@@ -1,8 +1,4 @@
-﻿// Xml Visualizer v.2
-// by Lars Hove Christiansen (larshove@gmail.com)
-// http://www.codeplex.com/XmlVisualizer
-
-using System;
+﻿using System;
 using System.Resources;
 using System.Windows.Forms;
 using ICSharpCode.TextEditor;
@@ -43,13 +39,13 @@ namespace ProXmlEditor {
             return textEditorControl.Text;
         }
 
-        public int GetLengthOfLinesInText() {
+        public int GetCountOfLines() {
             return textEditorControl.ActiveTextAreaControl.Document.TotalNumberOfLines;
         }
 
-        //public int GetLengthOfLine(int lineN) {
-            //return textEditorControl.ActiveTextAreaControl.Document.TextLength
-        //}
+        public int GetLengthOfLine(int lineN) {
+            return textEditorControl.ActiveTextAreaControl.Document.TextLength;
+        }
         public void SetText(string text) {
             bool modified = ChangesInEditor;
             textEditorControl.Text = text;
@@ -104,7 +100,7 @@ namespace ProXmlEditor {
                 toolStripMenuItemRedo.Enabled = false;
             }
         }
-
+        
         private void toolStripMenuItemCut_Click(object sender, EventArgs e) {
             textEditorControl.ActiveTextAreaControl.TextArea.ClipboardHandler.Cut(sender, e);
         }
@@ -149,31 +145,6 @@ namespace ProXmlEditor {
             textEditorControl.ActiveTextAreaControl.TextArea.ClipboardHandler.Delete(sender, e);
         }
 
-        public void Search(string searchText) {
-            if (searchText.Trim().Trim().Length == 0) {
-                return;
-            }
-
-            int startIndex = textEditorControl.ActiveTextAreaControl.Caret.Offset;
-
-            if (startIndex > textEditorControl.Document.TextContent.ToLower().LastIndexOf(searchText.ToLower())) {
-                startIndex = 0;
-            }
-
-            int offset = textEditorControl.Document.TextContent.ToLower().IndexOf(searchText.ToLower(), startIndex);
-
-            if (offset >= 0) {
-                TextLocation startPosition = textEditorControl.Document.OffsetToPosition(offset);
-                TextLocation endPosition = textEditorControl.Document.OffsetToPosition(offset + searchText.Length);
-
-                textEditorControl.ActiveTextAreaControl.SelectionManager.SetSelection(startPosition, endPosition);
-
-                GotoLine(textEditorControl.Document.GetLineNumberForOffset(offset) + 1,
-                    startPosition.Column + searchText.Length + 1);
-            }
-            else {
-                Util.ShowMessage(string.Format("'{0}' not found.", searchText));
-            }
-        }
+        
     }
 }

@@ -34,9 +34,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newBtn = new System.Windows.Forms.ToolStripButton();
@@ -153,33 +151,19 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToolStripMenuItem,
-            this.pasteToolStripMenuItem,
-            this.cutToolStripMenuItem});
+            this.refreshToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
-            // copyToolStripMenuItem
+            // refreshToolStripMenuItem
             // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.pasteToolStripMenuItem.Text = "Paste";
-            // 
-            // cutToolStripMenuItem
-            // 
-            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.cutToolStripMenuItem.Text = "Cut";
+            this.refreshToolStripMenuItem.Image = global::ProXmlEditor.Properties.Resources.refresh39;
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh Tree";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -248,7 +232,7 @@
             this.expandBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.expandBtn.Name = "expandBtn";
             this.expandBtn.Size = new System.Drawing.Size(78, 20);
-            this.expandBtn.Text = "toolStripButton1";
+            this.expandBtn.Text = "Expand tree";
             this.expandBtn.Click += new System.EventHandler(this.expandBtn_Click);
             // 
             // collapsBtn
@@ -258,7 +242,7 @@
             this.collapsBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.collapsBtn.Name = "collapsBtn";
             this.collapsBtn.Size = new System.Drawing.Size(78, 20);
-            this.collapsBtn.Text = "toolStripButton2";
+            this.collapsBtn.Text = "Collapse tree";
             this.collapsBtn.Click += new System.EventHandler(this.collapsBtn_Click);
             // 
             // toolStripSeparator4
@@ -272,7 +256,7 @@
             this.closeBtn.Image = global::ProXmlEditor.Properties.Resources.close20;
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(78, 20);
-            this.closeBtn.Text = "toolStripButton5";
+            this.closeBtn.Text = "Close";
             this.closeBtn.Click += new System.EventHandler(this.removeBTN_Click);
             // 
             // treeView1
@@ -379,9 +363,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton newBtn;
@@ -399,5 +380,6 @@
         private System.Windows.Forms.ToolStripButton collapsBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
     }
 }

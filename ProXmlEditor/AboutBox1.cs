@@ -1,9 +1,7 @@
-﻿// Xml Visualizer v.2
-// by Lars Hove Christiansen (larshove@gmail.com)
-// http://www.codeplex.com/XmlVisualizer
-
-using System;
+﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace ProXmlEditor {
     internal partial class AboutForm : Form {
@@ -13,7 +11,17 @@ namespace ProXmlEditor {
         }
 
         private void SetAboutFormProperties() {
-            Text = Util.GetTitle();
+            Assembly thisAssembly = Assembly.GetExecutingAssembly();
+
+            object[] attributes = thisAssembly.GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+
+            string title = "";
+
+            if (attributes.Length == 1) {
+                title = ((AssemblyTitleAttribute)attributes[0]).Title;
+            }
+
+            Text = title;
         }
 
         public string ProgramVersion {
@@ -29,36 +37,37 @@ namespace ProXmlEditor {
         }
 
         private void urlLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(Util.GetDefaultWebBrowser());
-            psi.Arguments = "http://www.codeplex.com/XmlVisualizer";
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(GetDefaultWebBrowser());
+            psi.Arguments = "https://github.com/metjka/ProXmlEditor";
             System.Diagnostics.Process.Start(psi);
             Close();
         }
 
         private void mailLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.Process.Start("mailto:larshove@gmail.com");
+            System.Diagnostics.Process.Start("mailto:w50901@student.wsiz.rzeszow.pl");
             Close();
         }
 
-        private void iconsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(Util.GetDefaultWebBrowser());
-            psi.Arguments = "http://famfamfam.com/";
-            System.Diagnostics.Process.Start(psi);
-            Close();
-        }
+        public static string GetDefaultWebBrowser() {
+            RegistryKey rk = Registry.ClassesRoot;
+            RegistryKey sk = rk.CreateSubKey(@"HTTP\shell\open\command");
 
-        private void editorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(Util.GetDefaultWebBrowser());
-            psi.Arguments = "http://sharpdevelop.net/";
-            System.Diagnostics.Process.Start(psi);
-            Close();
-        }
+            string returnValue = "";
 
-        private void donatePictureBox_Click(object sender, EventArgs e) {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(Util.GetDefaultWebBrowser());
-            psi.Arguments = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ZWQLCKZ4B9QKS&lc=GB&item_name=Xml%20Visualizer%20v%2e2&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted";
-            System.Diagnostics.Process.Start(psi);
-            Close();
+            if (sk != null) {
+                returnValue = sk.GetValue(null).ToString();
+
+                int startPos = returnValue.IndexOf((char)34);
+                int endPos = returnValue.IndexOf((char)34, startPos + 1);
+
+                returnValue = returnValue.Substring(startPos + 1, endPos - 1);
+            }
+
+            if (returnValue == "") {
+                returnValue = "iexplore.exe";
+            }
+
+            return returnValue;
         }
     }
 }

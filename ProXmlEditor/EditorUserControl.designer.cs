@@ -140,7 +140,6 @@ namespace ProXmlEditor
             this.textEditorControl.IsReadOnly = false;
             this.textEditorControl.Location = new System.Drawing.Point(0, 0);
             this.textEditorControl.Name = "textEditorControl";
-            this.textEditorControl.ShowVRuler = false;
             this.textEditorControl.Size = new System.Drawing.Size(492, 278);
             this.textEditorControl.TabIndex = 1;
             // 
