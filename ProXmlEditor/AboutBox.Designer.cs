@@ -127,7 +127,7 @@ namespace ProXmlEditor {
             this.Controls.Add(this.urlLinkLabel);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.okButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutForm";

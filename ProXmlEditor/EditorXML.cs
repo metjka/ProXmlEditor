@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Serialization;
+
 
 namespace ProXmlEditor {
     public partial class EditorXml : Form {
@@ -209,22 +209,18 @@ namespace ProXmlEditor {
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-            using (var af = new AboutForm()) {
+                var af = new AboutForm();
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 af.ProgramVersion = version.Substring(0, version.Length - 4);
-
                 Assembly thisAssembly = Assembly.GetExecutingAssembly();
                 object[] attributes = thisAssembly.GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
                 string title = "";
-
                 if (attributes.Length == 1) {
                     title = ((AssemblyTitleAttribute)attributes[0]).Title;
                 }
-
-                
                 af.Title = title;
                 af.ShowDialog();
-            }
+            
         }
 
         private void expandBtn_Click(object sender, EventArgs e) {
@@ -246,100 +242,8 @@ namespace ProXmlEditor {
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {
             var obj = e.Node.Tag as XmlNode;
             if (obj != null) {
-                /*if ((obj.LineNumber != 0) && (obj.LineNumber < GetXmlEditor().GetCountOfLines())) {
-                    int length = 0;
-                    for (int i = 0; i < obj.LineNumber - 1; i++) {
-                        length += GetXmlEditor().GetCountOfLines();
-
-                        MessageBox.Show(obj.LineNumber.ToString());
-                    }
-                }
-                */
+                
             }
         }
-
-        
-        /*
-        private void tvSchema_AfterSelect(object sender, TreeViewEventArgs e) {
-            var obj = e.Node.Tag as XmlSchemaObject;
-            // if this is a schema object...
-            if (obj != null) {
-                // find the corresponding line in the XSD source and highlight it
-                if ((obj.LineNumber != 0) && (obj.LineNumber < edSchema.Lines.Length)) {
-                    int length = 0;
-                    for (int i = 0; i < obj.LineNumber - 1; i++) {
-                        // get the length of the line including CRLF
-                        length += edSchema.Lines[i].Length + 2;
-                    }
-                    // highlight the line
-                    edSchema.Select(length, edSchema.Lines[obj.LineNumber - 1].Length);
-                }
-
-                // Update simple and global type combo boxes.
-                // Get the name of the element type so that we can find it in the simple or global type list
-                XmlQualifiedName name = null; // assume failure
-                if (obj is XmlSchemaAttribute) {
-                    // this is easy.
-                    name = ((XmlSchemaAttribute)obj).SchemaTypeName;
-                }
-                else if (obj is XmlSchemaSimpleType) {
-                    // if it's a simple type, get the restriction type, if it exists
-                    var restriction = ((XmlSchemaSimpleType)obj).Content as XmlSchemaSimpleTypeRestriction;
-                    if (restriction != null) {
-                        name = restriction.BaseTypeName;
-                    }
-                }
-                else if (obj is XmlSchemaElement) {
-                    // if it's an element, determine if it's a simple type subnode of a complex type...
-                    // and then get the restriction type, if it exists
-                    var el = obj as XmlSchemaElement;
-                    if (el.SchemaType is XmlSchemaSimpleType) {
-                        var st = el.SchemaType as XmlSchemaSimpleType;
-                        var rest = st.Content as XmlSchemaSimpleTypeRestriction;
-                        if (rest != null) {
-                            name = rest.BaseTypeName;
-                        }
-                    }
-                    else {
-                        // otherwise get the element name
-                        name = el.SchemaTypeName;
-
-                        // if the name is null, then there must be a reference instead
-                        if (name.Name == "") {
-                            name = el.RefName;
-                        }
-                    }
-                }
-
-                // select the name from either the simple type list or the global element type list
-                if (name != null) {
-                    // see if the name exists in the simple type list
-                    int idx = cbSimpleTypes.FindStringExact(name.Name);
-                    cbSimpleTypes.SelectedIndex = idx;
-                    cbSimpleTypes.Enabled = true;
-
-                    // see if the name exists in the complex type list
-                    idx = cbGlobalTypes.FindStringExact(name.Name);
-                    cbGlobalTypes.SelectedIndex = idx;
-                    cbGlobalTypes.Enabled = true;
-                }
-                else {
-                    // if there is no name, then disable the comboboxes
-                    cbSimpleTypes.SelectedIndex = -1;
-                    cbGlobalTypes.SelectedIndex = -1;
-                    cbSimpleTypes.Enabled = false;
-                    cbGlobalTypes.Enabled = false;
-                }
-            }
-            else {
-                // if this isn't a schema object, then disable the comboboxes
-                cbSimpleTypes.SelectedIndex = -1;
-                cbGlobalTypes.SelectedIndex = -1;
-                cbSimpleTypes.Enabled = false;
-                cbGlobalTypes.Enabled = false;
-            }
-        }
-        */
-        
     }
 }

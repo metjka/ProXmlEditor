@@ -43,6 +43,7 @@ namespace ProXmlEditor
             this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textEditorControl = new ICSharpCode.TextEditor.TextEditorControl();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -59,9 +60,10 @@ namespace ProXmlEditor
             this.toolStripMenuItemPaste,
             this.toolStripMenuItemDelete,
             this.toolStripSeparator2,
-            this.toolStripMenuItemSelectAll});
+            this.toolStripMenuItemSelectAll,
+            this.addNodeToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(175, 170);
+            this.contextMenuStrip.Size = new System.Drawing.Size(175, 192);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // toolStripMenuItemUndo
@@ -131,6 +133,14 @@ namespace ProXmlEditor
             this.toolStripMenuItemSelectAll.Text = "Select All";
             this.toolStripMenuItemSelectAll.Click += new System.EventHandler(this.toolStripMenuItemSelectAll_Click);
             // 
+            // addNodeToolStripMenuItem
+            // 
+            this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
+            this.addNodeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
+            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.addNodeToolStripMenuItem.Text = "Add Node";
+            this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
+            // 
             // textEditorControl
             // 
             this.textEditorControl.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -170,6 +180,7 @@ namespace ProXmlEditor
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSelectAll;
+        private System.Windows.Forms.ToolStripMenuItem addNodeToolStripMenuItem;
 
     }
 }

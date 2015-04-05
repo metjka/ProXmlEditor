@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
-using Microsoft.Win32;
 
 namespace ProXmlEditor {
     internal partial class AboutForm : Form {
@@ -37,37 +36,13 @@ namespace ProXmlEditor {
         }
 
         private void urlLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(GetDefaultWebBrowser());
-            psi.Arguments = "https://github.com/metjka/ProXmlEditor";
-            System.Diagnostics.Process.Start(psi);
+            System.Diagnostics.Process.Start("https://github.com/metjka/ProXmlEditor/");
             Close();
         }
 
         private void mailLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
             System.Diagnostics.Process.Start("mailto:w50901@student.wsiz.rzeszow.pl");
             Close();
-        }
-
-        public static string GetDefaultWebBrowser() {
-            RegistryKey rk = Registry.ClassesRoot;
-            RegistryKey sk = rk.CreateSubKey(@"HTTP\shell\open\command");
-
-            string returnValue = "";
-
-            if (sk != null) {
-                returnValue = sk.GetValue(null).ToString();
-
-                int startPos = returnValue.IndexOf((char)34);
-                int endPos = returnValue.IndexOf((char)34, startPos + 1);
-
-                returnValue = returnValue.Substring(startPos + 1, endPos - 1);
-            }
-
-            if (returnValue == "") {
-                returnValue = "iexplore.exe";
-            }
-
-            return returnValue;
         }
     }
 }

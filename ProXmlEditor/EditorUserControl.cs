@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Resources;
 using System.Windows.Forms;
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
@@ -119,7 +118,7 @@ namespace ProXmlEditor {
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
             if (textEditorControl.ActiveTextAreaControl.TextArea.Focused) {
-                if ((int) keyData == 131137) // Keys.Control && keyData == Keys.A
+                if ((int) keyData == 131137) 
                 {
                     SelectAll();
                     return true;
@@ -143,6 +142,12 @@ namespace ProXmlEditor {
 
         private void toolStripMenuItemDelete_Click(object sender, EventArgs e) {
             textEditorControl.ActiveTextAreaControl.TextArea.ClipboardHandler.Delete(sender, e);
+        }
+
+        private void addNodeToolStripMenuItem_Click(object sender, EventArgs e) {
+            var addNodeDialog = new AddNodeForm();
+            addNodeDialog.ShowDialog();
+            textEditorControl.ActiveTextAreaControl.TextArea.InsertString(addNodeDialog.xmlNodeStr);
         }
 
         
