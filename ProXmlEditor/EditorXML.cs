@@ -34,7 +34,7 @@ namespace ProXmlEditor {
             AddTab();
             tabControl1.SelectedIndex += 1;
             openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            openFileDialog1.Filter = "XML|*.xml|Text Files|*.txt|All Files|*.*";
+            openFileDialog1.Filter = @"XML|*.xml|Text Files|*.txt|All Files|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 var sr = new StreamReader(openFileDialog1.FileName);
                 GetXmlEditor().SetText(sr.ReadToEnd());
@@ -44,30 +44,26 @@ namespace ProXmlEditor {
         }
 
         private void Save() {
-            //saveFileDialog1.FileName = tabControl1.SelectedTab.Name;
-            //saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //saveFileDialog1.Filter = "XML|*.xml|Text Files|*.txt|All Files|*.*";
-            //saveFileDialog1.Title = "Save";
             if (openFileDialog1.FileName == "") {
                 SaveAs();
             }
             else {
-                var SW = new StreamWriter(openFileDialog1.FileName, false, Encoding.UTF8);
-                SW.WriteLine(GetXmlEditor().GetText());
-                SW.Close();
+                var sw = new StreamWriter(openFileDialog1.FileName, false, Encoding.UTF8);
+                sw.WriteLine(GetXmlEditor().GetText());
+                sw.Close();
             }
         }
 
         private void SaveAs() {
             saveFileDialog1.FileName = tabControl1.SelectedTab.Name;
             saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            saveFileDialog1.Filter = "XML|*.xml|Text Files|*.txt|All Files|*.*";
-            saveFileDialog1.Title = "Save As";
+            saveFileDialog1.Filter = @"XML|*.xml|Text Files|*.txt|All Files|*.*";
+            saveFileDialog1.Title = @"Save As";
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK) {
-                var SW = new StreamWriter(saveFileDialog1.FileName);
-                SW.WriteLine(GetXmlEditor().GetText());
-                SW.Close();
+                var sw = new StreamWriter(saveFileDialog1.FileName);
+                sw.WriteLine(GetXmlEditor().GetText());
+                sw.Close();
             }
         }
 
@@ -103,14 +99,15 @@ namespace ProXmlEditor {
                 xmldoc.LoadXml(xmlText);
                 XmlNode xmlnode = xmldoc.ChildNodes[1];
                 treeView1.Nodes.Clear();
-                treeView1.Nodes.Add(new TreeNode(xmldoc.DocumentElement.Name));
+                if (xmldoc.DocumentElement != null) treeView1.Nodes.Add(new TreeNode(xmldoc.DocumentElement.Name));
                 TreeNode tNode;
                 tNode = treeView1.Nodes[0];
                 AddNode(xmlnode, tNode);
-                textBox1.Text = "Xml file is valid";
+                textBox1.Text = @"Xml file is valid";
             }
             catch (XmlException e) {
                 textBox1.Text = e.Message;
+                
                 treeView1.Nodes.Clear();
             }
         }
@@ -183,7 +180,6 @@ namespace ProXmlEditor {
         }
 
 
-
         private void newBTN_Click(object sender, EventArgs e) {
             AddTab();
             tabControl1.SelectedIndex += 1;
@@ -239,11 +235,6 @@ namespace ProXmlEditor {
             RemoveTab();
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {
-            var obj = e.Node.Tag as XmlNode;
-            if (obj != null) {
-                
-            }
-        }
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e) {    }
     }
 }

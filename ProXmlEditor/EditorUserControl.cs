@@ -9,7 +9,7 @@ namespace ProXmlEditor {
 
         public event CaretChangeEventHandler CaretChangeEvent;
 
-        private bool textChanged;
+        private bool _textChanged;
 
         public EditorUserControl() {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace ProXmlEditor {
         }
 
         private void Document_DocumentChanged(object sender, DocumentEventArgs e) {
-            textChanged = true;
+            _textChanged = true;
         }
 
         public string GetText() {
@@ -72,8 +72,8 @@ namespace ProXmlEditor {
         }
 
         public bool ChangesInEditor {
-            get { return textChanged; }
-            set { textChanged = value; }
+            get { return _textChanged; }
+            set { _textChanged = value; }
         }
 
         private void toolStripMenuItemRedo_Click(object sender, EventArgs e) {
@@ -147,7 +147,7 @@ namespace ProXmlEditor {
         private void addNodeToolStripMenuItem_Click(object sender, EventArgs e) {
             var addNodeDialog = new AddNodeForm();
             addNodeDialog.ShowDialog();
-            textEditorControl.ActiveTextAreaControl.TextArea.InsertString(addNodeDialog.xmlNodeStr);
+            textEditorControl.ActiveTextAreaControl.TextArea.InsertString(addNodeDialog.XmlNodeStr);
         }
 
         
