@@ -1,0 +1,13 @@
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.Properties.Resources.resources
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.csproj.GenerateResource.Cache
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\bin\Debug\ProXmlEditor.exe
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\bin\Debug\ProXmlEditor.pdb
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.exe
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.pdb
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\bin\Debug\ICSharpCode.TextEditor.dll
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.EditorUserControl.resources
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.AboutForm.resources
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.g.resources
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.EditorXML.resources
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.csprojResolveAssemblyReference.cache
+D:\Dropbox\Development\c#\ProXmlEditor\ProXmlEditor\obj\Debug\ProXmlEditor.AddNodeForm.resources
